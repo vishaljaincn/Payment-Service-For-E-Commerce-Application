@@ -28,4 +28,11 @@ public class RazorpayWebHookController {
     public void receiveWebhook() {
         System.out.println("Webhook method called. Process the Razorpay webhook notification here.");
     }
+
+    public void receiveWebhook(String orderId, String paymentId, String status) {
+        System.out.println("Webhook method called. Process the Razorpay webhook notification here.");
+        System.out.println("Order ID: " + orderId);
+        System.out.println("Payment ID: " + paymentId);
+        System.out.println("Status: " + status);
+    }
 }

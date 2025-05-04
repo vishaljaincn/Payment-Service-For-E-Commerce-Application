@@ -6,16 +6,19 @@ import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
+import javax.crypto.Cipher;
+import javax.crypto.NoSuchPaddingException;
+import java.security.NoSuchAlgorithmException;
 
 @Service("razorpay")
 public class RazorpayPaymentService implements PaymentService {
 
     private final RazorpayClient razorpayClient;
 
-    public RazorpayPaymentService(RazorpayClient razorpayClient) {
+    public RazorpayPaymentService(RazorpayClient razorpayClient) throws NoSuchPaddingException, NoSuchAlgorithmException {
         this.razorpayClient = razorpayClient;
     }
-
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
     /**
      * Generates a Razorpay payment link for the given details.
      *

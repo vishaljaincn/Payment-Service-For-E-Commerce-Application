@@ -1,12 +1,16 @@
 package com.example.paymentservice.Controllers;
 
+import com.example.paymentservice.Configuration.Done;
 import com.example.paymentservice.Dtos.InitiatePaymentRequestDto;
 import com.example.paymentservice.Service.PaymentService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.logging.Logger;
 
 /**
  * This class exposes REST API endpoints for payment operations.
@@ -19,6 +23,7 @@ public class PaymentController {
      * Injected PaymentService instance using Spring Qualifier.
      */
     private final PaymentService paymentService;
+    private static final Logger logger = Logger.getLogger(PaymentController.class.getName());
 
     /**
      * Constructor to inject the PaymentService implementation.
@@ -43,7 +48,10 @@ public class PaymentController {
     @PostMapping("/initiate")
     public String initiatePayment(
             @RequestBody InitiatePaymentRequestDto
-                    initiatePaymentRequestDto) throws Exception {
+                    initiatePaymentRequestDto, HttpServletRequest httpServletRequest) throws Exception {
+//        System.out.println("URI  "+httpServletRequest.getRequestURI());
+//        System.out.println("URL  "+httpServletRequest.getRequestURL());
+        Done done = new Done();
         return paymentService.generatePaymentLink(
                 initiatePaymentRequestDto.getEmail(),
                 initiatePaymentRequestDto.getPhoneNumber(),
