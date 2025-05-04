@@ -1,6 +1,5 @@
 package com.example.paymentservice.Controllers;
 
-import com.example.paymentservice.Configuration.Done;
 import com.example.paymentservice.Dtos.InitiatePaymentRequestDto;
 import com.example.paymentservice.Service.PaymentService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -51,7 +50,6 @@ public class PaymentController {
                     initiatePaymentRequestDto, HttpServletRequest httpServletRequest) throws Exception {
 //        System.out.println("URI  "+httpServletRequest.getRequestURI());
 //        System.out.println("URL  "+httpServletRequest.getRequestURL());
-        Done done = new Done();
         return paymentService.generatePaymentLink(
                 initiatePaymentRequestDto.getEmail(),
                 initiatePaymentRequestDto.getPhoneNumber(),
